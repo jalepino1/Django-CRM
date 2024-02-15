@@ -1,0 +1,41 @@
+{%extends 'base.html'%}
+
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+
+{% if user.is_authenticated %}
+<h1> Welcome</h1>
+
+    {% else %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>Login</h1>
+    <br> <!-- This line breaks put space in between login and our login box -->
+    <form method="POST" action="{% url 'home' %}">
+        <!-- Everytime that we make a form in django, we have to include a token. -->
+        <!-- This is a Cross Site Request Form token that prevents it from getting hijacked by hackers-->
+        <!-- We can drop in a form from bootstrap samples! -->
+        {% csrf_token %}
+        <form>
+            <div class="mb-3">
+                <!-- When we create a password field, we can make it required so they cant continue unless they fill out the field-->
+              <input type="text" class="form-control" name="username", placeholder="Username" required >
+            </div>
+            <div class="mb-3">
+              <input type="password" class="form-control" name="password", placeholder="Password" required >
+            </div>
+            <br>
+            <button type="submit" class="btn btn-secondary">Login</button>
+          </form>
+    </form>
+</div>
+
+{% endif %}
+
+{% endblock %}
