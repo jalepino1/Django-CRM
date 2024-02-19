@@ -2,11 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from . forms import SignUpForm
+from .models import Record
 # Create your views here.
 #request are request that are sent from interaction with the webpage and are sent to the backend to process them
 def home(request):
+    records = Record.objects.all()
+    print(records)
+    # Checks to see if they are logging in
     if request.method == "POST":
-
         # If POST is passed in our request, we will get the username and password from the post, and define it as variables.
         Username = request.POST['username']
         Password = request.POST['password']
@@ -20,7 +23,7 @@ def home(request):
             messages.success(request, "Login unsuccessful")
             return redirect('home')
     else:
-        return render(request, 'home.html', {})
+        return render(request, 'home.html', {'records' : records})
 
 
 def logout_user(request):
@@ -42,6 +45,9 @@ def register_user(request):
             login(request, user)
             messages.success(request, "You have successfully created an account.")
             return redirect('home')
+            return render(request, 'register.html', {'form' : form })
     else:
         form = SignUpForm()
         return render(request, 'register.html', {'form' : form })
+    
+    return render(request, 'register.html', {'form' : form })
