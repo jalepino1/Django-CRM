@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from . forms import SignUpForm, AddRecord
+from .forms import SignUpForm
+from .forms import AddRecordForm
 from .models import Record
 # Create your views here.
 #request are request that are sent from interaction with the webpage and are sent to the backend to process them
@@ -72,14 +73,14 @@ def delete_record(request, pk):
         return redirect('home')
     
 def add_record(request):
-    form = AddRecord(request.POST or None)
+    form = AddRecordForm(request.POST or None)
     if request.user.is_authenticated:
-        if request.method == 'POST':   
-            if form.is_valid:
+        if request.method == "POST":   
+            if form.is_valid():
                 add_record = form.save()
-                messages.success("Record Added")
+                messages.success(request, "Record Added")
                 return redirect('home')
-        return render(request, 'add_record.html', {"form" : form})
+        return render(request, 'add_record.html', {'form' : form})
     else:
-        messages.success("User not logged in")
+        messages.success(request, "User not logged in")
         return redirect('home')

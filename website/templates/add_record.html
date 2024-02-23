@@ -4,9 +4,10 @@
 <div class="col-md-6 offset-md-3">
 <h1>Add Record</h1>
 <br>
-<form method="POST" action="add_record">
+<form method="POST" action="{% url 'add_record' %}">
     {% csrf_token %}
-    {{ form.as_p}}
+
+    {{ form.as_p }}
     <button type="submit" class="btn btn-secondary">Add Record</button>
 </form>
 

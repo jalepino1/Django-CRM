@@ -33,7 +33,7 @@ class SignUpForm(UserCreationForm):
 
 # Add record form
 # We need to import our model record in order to use modelform
-class AddRecord(forms.ModelForm):
+class AddRecordForm(forms.ModelForm):
 	first_name = forms.CharField(
 		required=True, 
 		widget=forms.widgets.TextInput(attrs={"placeholder":"First Name", "class":"form-control"}),
@@ -67,6 +67,6 @@ class AddRecord(forms.ModelForm):
 		widget=forms.widgets.TextInput(attrs={"placeholder":"Zipcode", "class":"form-control"}),
 		label='')
 	
-	class meta:
+	class Meta:
 		model = Record
-		fields = ( 'first_name', 'last_name', 'email', 'phone', 'address', 'city', 'state', 'zipcode')
+		exclude = ("user",)
