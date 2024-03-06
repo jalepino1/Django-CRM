@@ -80,15 +80,11 @@ WSGI_APPLICATION = 'CRM.wsgi.application'
 
 DATABASES = {
     
-        
-       'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'CRMdb',
-        'USER' : 'postgres',
-        'PASSWORD' : '090403',
-        'HOST' : 'localhost',
-        'PORT' : '5433',
-    }
+      'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgresql://postgres:postgres@localhost:5433/CRM',
+        conn_max_age=600
+    )
         
 }
 
