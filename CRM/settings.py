@@ -127,7 +127,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = '/Users/henrycrawley/Desktop/CRM/website/templates/static'
+#STATIC_URL = '/Users/henrycrawley/Desktop/CRM/website/templates/static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
