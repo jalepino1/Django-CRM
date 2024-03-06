@@ -14,6 +14,7 @@ from pathlib import Path
 import psycopg2
 import dj_database_url
 import os
+import mysql
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -79,13 +80,14 @@ WSGI_APPLICATION = 'CRM.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    
-      'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost:5433/CRM',
-        conn_max_age=600
-    )
-        
+     'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'CRMdb',
+        'USER' : 'root',
+        'PASSWORD' : 'Henrycrawley15!',
+        'HOST' : 'localhost',
+        'PORT' : '3306',
+    }
 }
 
 #run python -m gunicorn CRM.asgi:application -k uvicorn.workers.UvicornWorker
@@ -127,11 +129,6 @@ STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-if not DEBUG:
-    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
-    # and renames the files with unique names for each version to support long-term caching
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
